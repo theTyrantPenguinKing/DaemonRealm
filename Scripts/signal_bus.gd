@@ -1,0 +1,4 @@
+extends Node
+
+signal new_game_selected
+signal exit_request_confirmed
