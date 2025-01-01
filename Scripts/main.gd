@@ -2,12 +2,17 @@ extends Node
 
 var level : Node3D = null
 var main_menu : Control = null
+var debug_panel : Control = null
 
 func _ready() -> void:
 	get_tree().paused = true
 	load_main_menu()
 	
+	debug_panel = load("res://UI/debug_panel.tscn").instantiate()
+	add_child(debug_panel)
+	
 	main_menu_signals()
+	debug_panel_signals()
 
 func _process(delta: float) -> void:
 	if get_tree().paused:
@@ -24,6 +29,9 @@ func _process(delta: float) -> void:
 				delete_main_menu()
 				level.show()
 				get_tree().paused = false
+	
+	if Input.is_action_just_pressed("debug_panel"):
+		SignalBus.debug_panel_requested.emit()
 
 func create_new_game():
 	if load_level("res://Levels/map_1.tscn"):
@@ -36,6 +44,9 @@ func exit_game() -> void:
 func main_menu_signals() -> void:
 	SignalBus.new_game_selected.connect(create_new_game)
 	SignalBus.exit_request_confirmed.connect(exit_game)
+
+func debug_panel_signals() -> void:
+	pass
 
 func load_main_menu() -> void:
 	if not main_menu:
