@@ -23,6 +23,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, lower_tilt_angle,\
 		upper_tilt_angle)
+	
+
+func _process(delta: float) -> void:
+	SignalBus.update_debug_label.emit("fps", str(1.0 / delta))
 
 func _physics_process(delta: float) -> void:
 	if position.y < -1.0:
