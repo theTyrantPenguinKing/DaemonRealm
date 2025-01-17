@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bjomtgas5mvr5"]
+
+[ext_resource type="Script" path="res://characters/player/scripts/player_resource.gd" id="1_gq2yp"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_gq2yp")
+walking_speed = 4.0
+sprinting_speed = 8.0
+jumping_speed = 5.0
+crouching_speed = 5.0
