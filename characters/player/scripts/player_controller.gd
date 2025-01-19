@@ -15,14 +15,18 @@ class_name PlayerController
 @export_range(45.0, 90.0, 0.1, "radians_as_degrees") \
 		var upper_vertical_angle : float = deg_to_rad(75.0)
 
+@onready var movement_fsm : MovementFSM = $MovementFSM 
+@onready var jump_fsm : JumpFSM = $JumpFSM
+@onready var crouch_fsm : CrouchFSM = $CrouchFSM
+
+var input_dir : Vector2
 var direction : Vector3
 var speed : float
 var interpolation_amount : float = 1 / 8.0
 
 func _ready() -> void:
-	SignalBus.player_input_dir_changed.connect(update_direction)
-	SignalBus.player_jumped.connect(jump_update)
-
+	pass
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var rot_hor : float = deg_to_rad(-event.relative.x) * \
@@ -40,18 +44,23 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
+	update_direction()
 	update_velocity()
+	
 	move_and_slide()
 
-func update_direction(input_dir : Vector2, new_speed : float) -> void:
+func update_direction() -> void:
 	direction = global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
-	speed = new_speed
-
-func jump_update(jump_speed : float) -> void:
-	velocity.y = jump_speed
 
 func update_velocity() -> void:
-	velocity.x = lerp(velocity.x, direction.x * speed,\
-			interpolation_amount)
-	velocity.z = lerp(velocity.z, direction.z * speed,\
-			interpolation_amount)
+	var state_name : String = movement_fsm.get_current_state_name().to_lower()
+	match state_name:
+		"idle":
+			speed = 0.0
+		"walking":
+			speed = player_data.walking_speed
+		"sprinting":
+			speed = player_data.sprinting_speed
+	
+	velocity.x = direction.x * speed
+	velocity.z = direction.z * speed

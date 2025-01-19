@@ -8,6 +8,7 @@ class_name JumpFSM
 var current_state : JumpFSM
 var states : Dictionary = {}
 var mutex : Mutex = Mutex.new()
+var key : String = ""
 
 func _ready() -> void:
 	SignalBus.player_jump_state_changed.connect(change_state)
@@ -36,7 +37,7 @@ func update() -> void:
 	pass
 
 func change_state(source_state : JumpFSM, new_state_name : String) -> void:
-	var key : String = new_state_name.to_lower()
+	key = new_state_name.to_lower()
 	
 	if not source_state or not key or key == "":
 		return

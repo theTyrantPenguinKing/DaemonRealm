@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://characters/player/scripts/player_controller.gd" id="1_42pmi"]
 [ext_resource type="Resource" uid="uid://bjomtgas5mvr5" path="res://characters/player/resources/player.tres" id="2_g35bi"]
 [ext_resource type="Script" path="res://characters/player/scripts/movement_fsm.gd" id="2_ghafq"]
-[ext_resource type="Script" path="res://characters/player/scripts/idle.gd" id="3_n28nb"]
-[ext_resource type="Script" path="res://characters/player/scripts/walking.gd" id="4_ano2a"]
-[ext_resource type="Script" path="res://characters/player/scripts/sprinting.gd" id="5_h5f7m"]
+[ext_resource type="Script" path="res://characters/player/scripts/player_idle.gd" id="3_n28nb"]
+[ext_resource type="Script" path="res://characters/player/scripts/player_walking.gd" id="4_ano2a"]
+[ext_resource type="Script" path="res://characters/player/scripts/player_sprinting.gd" id="5_h5f7m"]
 [ext_resource type="Script" path="res://characters/player/scripts/jump_fsm.gd" id="6_7pu0j"]
-[ext_resource type="Script" path="res://characters/player/scripts/not_jumping.gd" id="7_fdteq"]
-[ext_resource type="Script" path="res://characters/player/scripts/jumping.gd" id="8_fniqy"]
+[ext_resource type="Script" path="res://characters/player/scripts/player_not_jumping.gd" id="7_fdteq"]
+[ext_resource type="Script" path="res://characters/player/scripts/player_jumping.gd" id="8_fniqy"]
 [ext_resource type="Script" path="res://characters/player/scripts/crouch_fsm.gd" id="10_a2fxy"]
-[ext_resource type="Script" path="res://characters/player/scripts/uncrouched.gd" id="11_162c8"]
-[ext_resource type="Script" path="res://characters/player/scripts/crouched.gd" id="12_ph3rd"]
+[ext_resource type="Script" path="res://characters/player/scripts/player_uncrouched.gd" id="11_162c8"]
+[ext_resource type="Script" path="res://characters/player/scripts/player_crouched.gd" id="12_ph3rd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ccp0t"]
 radius = 0.15
@@ -301,7 +301,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 [node name="Camera3D" type="Camera3D" parent="CameraController/HeadBobbing"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_p6ddx")
 }
