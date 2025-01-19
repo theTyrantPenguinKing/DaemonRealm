@@ -3,11 +3,12 @@ class_name CrouchFSM
 
 @export var initial_state : CrouchFSM
 @onready var actor : CharacterBody3D = self.owner
+@onready var animation_player : AnimationPlayer = $"../AnimationPlayer"
 
 var current_state : CrouchFSM
 var states : Dictionary = {}
 var mutex : Mutex = Mutex.new()
-@onready var animation_player = %AnimationPlayer
+var key : String = ""
 
 func _ready() -> void:
 	SignalBus.player_crouch_state_changed.connect(change_state)
@@ -26,6 +27,9 @@ func _process(delta: float) -> void:
 		current_state.update()
 		mutex.unlock()
 
+func get_current_state_name() -> String:
+	return key
+
 func enter() -> void:
 	pass
 
@@ -36,7 +40,7 @@ func update() -> void:
 	pass
 
 func change_state(source_state : CrouchFSM, new_state_name : String) -> void:
-	var key : String = new_state_name.to_lower()
+	key = new_state_name.to_lower()
 	
 	if not source_state or not key or key == "":
 		return

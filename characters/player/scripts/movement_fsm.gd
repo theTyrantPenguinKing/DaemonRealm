@@ -2,11 +2,13 @@ extends Node
 class_name MovementFSM
 
 @export var initial_state : MovementFSM
+
 @onready var actor : CharacterBody3D = self.owner
 
 var current_state : MovementFSM = null
 var states : Dictionary = {}
 var mutex : Mutex = Mutex.new()
+var key : String = ""
 
 func _ready() -> void:
 	SignalBus.player_movement_state_changed.connect(change_state)
@@ -16,6 +18,7 @@ func _ready() -> void:
 	
 	if initial_state:
 		current_state = initial_state
+		key = current_state.name.to_lower()
 		current_state.enter()
 
 func _process(delta: float) -> void:
@@ -23,6 +26,9 @@ func _process(delta: float) -> void:
 		mutex.lock()
 		current_state.update()
 		mutex.unlock()
+
+func get_current_state_name() -> String:
+	return key
 
 func enter() -> void:
 	pass
@@ -35,7 +41,7 @@ func update() -> void:
 
 func change_state(source_state : MovementFSM,\
 		new_state_name : String) -> void:
-	var key : String = new_state_name.to_lower()
+	key = new_state_name.to_lower()
 	
 	# invalid source_state or key
 	if not source_state or not key or key == "":

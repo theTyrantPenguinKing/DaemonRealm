@@ -2,11 +2,9 @@ extends CrouchFSM
 class_name Crouched
 
 func enter() -> void:
-	#if animation_player:
 	animation_player.play("crouch", -1.0, actor.player_data.crouching_speed)
 
 func exit() -> void:
-	#if animation_player:
 	animation_player.play("crouch", -1.0, -actor.player_data.crouching_speed,\
 			true)
 

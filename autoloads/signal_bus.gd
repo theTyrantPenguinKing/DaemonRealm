@@ -14,5 +14,4 @@ signal player_jump_state_changed(source_state : JumpFSM,\
 		new_state_name : String)
 signal player_crouch_state_changed(source_state : CrouchFSM,\
 		new_state_name : String)
-signal player_input_dir_changed(input_dir : Vector2, speed : float)
-signal player_jumped(speed : float)
+signal player_input_dir_changed(input_dir : Vector2)
