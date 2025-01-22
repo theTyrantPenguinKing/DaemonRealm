@@ -27,9 +27,6 @@ func _process(delta: float) -> void:
 		current_state.update()
 		mutex.unlock()
 
-func get_current_state_name() -> String:
-	return key
-
 func enter() -> void:
 	pass
 

@@ -15,14 +15,11 @@ class_name PlayerController
 @export_range(45.0, 90.0, 0.1, "radians_as_degrees") \
 		var upper_vertical_angle : float = deg_to_rad(75.0)
 
-@onready var movement_fsm : MovementFSM = $MovementFSM 
-@onready var jump_fsm : JumpFSM = $JumpFSM
-@onready var crouch_fsm : CrouchFSM = $CrouchFSM
 
 var input_dir : Vector2
 var direction : Vector3
 var speed : float
-var interpolation_amount : float = 1 / 8.0
+var interpolation_amount = 0.15
 
 func _ready() -> void:
 	pass
@@ -45,22 +42,8 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	update_direction()
-	update_velocity()
 	
 	move_and_slide()
 
 func update_direction() -> void:
 	direction = global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
-
-func update_velocity() -> void:
-	var state_name : String = movement_fsm.get_current_state_name().to_lower()
-	match state_name:
-		"idle":
-			speed = 0.0
-		"walking":
-			speed = player_data.walking_speed
-		"sprinting":
-			speed = player_data.sprinting_speed
-	
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed

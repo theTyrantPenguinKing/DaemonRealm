@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ckltky65sd3jn"]
+[gd_scene load_steps=19 format=3 uid="uid://ckltky65sd3jn"]
 
 [ext_resource type="Script" path="res://characters/player/scripts/player_controller.gd" id="1_42pmi"]
 [ext_resource type="Resource" uid="uid://bjomtgas5mvr5" path="res://characters/player/resources/player.tres" id="2_g35bi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://characters/player/scripts/jump_fsm.gd" id="6_7pu0j"]
 [ext_resource type="Script" path="res://characters/player/scripts/player_not_jumping.gd" id="7_fdteq"]
 [ext_resource type="Script" path="res://characters/player/scripts/player_jumping.gd" id="8_fniqy"]
+[ext_resource type="Script" path="res://characters/player/scripts/jumping_air.gd" id="10_8mus1"]
 [ext_resource type="Script" path="res://characters/player/scripts/crouch_fsm.gd" id="10_a2fxy"]
 [ext_resource type="Script" path="res://characters/player/scripts/player_uncrouched.gd" id="11_162c8"]
 [ext_resource type="Script" path="res://characters/player/scripts/player_crouched.gd" id="12_ph3rd"]
@@ -327,6 +328,9 @@ script = ExtResource("7_fdteq")
 
 [node name="Jumping" type="Node" parent="JumpFSM"]
 script = ExtResource("8_fniqy")
+
+[node name="JumpingAir" type="Node" parent="JumpFSM"]
+script = ExtResource("10_8mus1")
 
 [node name="CrouchFSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("10_a2fxy")
