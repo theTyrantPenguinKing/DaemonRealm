@@ -15,3 +15,6 @@ signal player_jump_state_changed(source_state : JumpFSM,\
 signal player_crouch_state_changed(source_state : CrouchFSM,\
 		new_state_name : String)
 signal player_input_dir_changed(input_dir : Vector2)
+
+# DEBUG SIGNALS
+signal debug_property_update_requested(prop_name : String, prop_info : String)

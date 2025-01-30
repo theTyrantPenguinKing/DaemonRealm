@@ -3,7 +3,7 @@ class_name CrouchFSM
 
 @export var initial_state : CrouchFSM
 @onready var actor : CharacterBody3D = self.owner
-@onready var animation_player : AnimationPlayer = $"../AnimationPlayer"
+@onready var animation_player : AnimationPlayer = %PlayerAnimations
 
 var current_state : CrouchFSM
 var states : Dictionary = {}
@@ -20,6 +20,9 @@ func _ready() -> void:
 	if initial_state:
 		current_state = initial_state
 		current_state.enter()
+		
+		SignalBus.debug_property_update_requested.emit("CrouchFSM",\
+				current_state.name)
 
 func _process(delta: float) -> void:
 	if current_state:
@@ -56,3 +59,6 @@ func change_state(source_state : CrouchFSM, new_state_name : String) -> void:
 	current_state = states[key]
 	current_state.enter()
 	mutex.unlock()
+	
+	SignalBus.debug_property_update_requested.emit("CrouchFSM",\
+			current_state.name)
