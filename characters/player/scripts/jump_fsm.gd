@@ -20,6 +20,9 @@ func _ready() -> void:
 	if initial_state:
 		current_state = initial_state
 		current_state.enter()
+		
+		SignalBus.debug_property_update_requested.emit("JumpFSM",\
+				current_state.name)
 
 func _process(delta: float) -> void:
 	if current_state:
@@ -53,3 +56,6 @@ func change_state(source_state : JumpFSM, new_state_name : String) -> void:
 	current_state = states[key]
 	current_state.enter()
 	mutex.unlock()
+	
+	SignalBus.debug_property_update_requested.emit("JumpFSM",\
+			current_state.name)

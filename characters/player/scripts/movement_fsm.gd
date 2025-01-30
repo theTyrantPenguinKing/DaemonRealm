@@ -20,6 +20,8 @@ func _ready() -> void:
 		current_state = initial_state
 		key = current_state.name.to_lower()
 		current_state.enter()
+		SignalBus.debug_property_update_requested.emit("MovementFSM",\
+				current_state.name)
 
 func _process(delta: float) -> void:
 	if current_state:
@@ -58,3 +60,6 @@ func change_state(source_state : MovementFSM,\
 	current_state = states[key]
 	current_state.enter()
 	mutex.unlock()
+	
+	SignalBus.debug_property_update_requested.emit("MovementFSM",\
+			current_state.name)
