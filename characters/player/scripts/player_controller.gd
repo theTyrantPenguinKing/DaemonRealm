@@ -16,15 +16,10 @@ class_name PlayerController
 @export_range(45.0, 90.0, 0.1, "radians_as_degrees") \
 		var upper_vertical_angle : float = deg_to_rad(75.0)
 
-@export_group("Head Bobbing Parameters")
-@export_range(1.0, 4.0, 0.1) var bob_frequency : float = 2.0
-@export_range(0.01, 0.1, 0.01) var bob_amplitude : float = 0.05
-
 var input_dir : Vector2
 var direction : Vector3
 var speed : float
 var interpolation_amount = 0.15
-var bob_time : float = 0.0
 
 func _ready() -> void:
 	pass
@@ -48,19 +43,8 @@ func _physics_process(delta: float) -> void:
 	
 	update_direction()
 	
-	bob_time += delta * velocity.length() * float(is_on_floor())
-	camera.transform.origin = head_bob(bob_time)
-	
 	move_and_slide()
 
 func update_direction() -> void:
 	direction = camera_controller.transform.basis * \
 			Vector3(input_dir.x, 0.0, input_dir.y)
-
-func head_bob(time : float) -> Vector3:
-	var pos : Vector3 = Vector3.ZERO
-	
-	pos.y = sin(time * bob_frequency) * bob_amplitude
-	pos.x = cos(time * bob_frequency) * bob_amplitude
-	
-	return pos
