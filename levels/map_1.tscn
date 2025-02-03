@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://byrdrb80bs1bh"]
+[gd_scene load_steps=10 format=3 uid="uid://byrdrb80bs1bh"]
 
 [ext_resource type="PackedScene" uid="uid://ckltky65sd3jn" path="res://characters/player/player_controller.tscn" id="1_4gmbn"]
 [ext_resource type="Script" path="res://characters/player/scripts/player_resource.gd" id="2_s417k"]
@@ -30,6 +30,10 @@ sprinting_speed = 8.0
 jumping_speed = 5.0
 crouching_speed = 5.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwfol"]
+transparency = 1
+albedo_color = Color(0, 0.933333, 1, 1)
+
 [node name="Map1" type="Node3D"]
 process_mode = 1
 
@@ -56,3 +60,4 @@ player_data = SubResource("Resource_im053")
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3)
 use_collision = true
+material = SubResource("StandardMaterial3D_iwfol")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://ckltky65sd3jn"]
+[gd_scene load_steps=20 format=3 uid="uid://ckltky65sd3jn"]
 
 [ext_resource type="Script" path="res://characters/player/scripts/player_controller.gd" id="1_42pmi"]
 [ext_resource type="Resource" uid="uid://bjomtgas5mvr5" path="res://characters/player/resources/player.tres" id="2_g35bi"]
 [ext_resource type="Script" path="res://characters/player/scripts/movement_fsm.gd" id="2_ghafq"]
+[ext_resource type="Script" path="res://characters/player/scripts/head_bobbing.gd" id="3_e763b"]
 [ext_resource type="Script" path="res://characters/player/scripts/player_idle.gd" id="3_n28nb"]
 [ext_resource type="Script" path="res://characters/player/scripts/player_walking.gd" id="4_ano2a"]
 [ext_resource type="Script" path="res://characters/player/scripts/player_sprinting.gd" id="5_h5f7m"]
@@ -280,7 +281,7 @@ _data = {
 process_mode = 1
 script = ExtResource("1_42pmi")
 camera_controller = NodePath("CameraController")
-camera = NodePath("CameraController/Camera3D")
+camera = NodePath("CameraController/HeadBobbing/Camera3D")
 player_data = ExtResource("2_g35bi")
 horizontal_sensitivity = 0.4
 vertical_sensitivity = 0.4
@@ -298,7 +299,10 @@ mesh = SubResource("CapsuleMesh_8wybk")
 [node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
+[node name="HeadBobbing" type="Node3D" parent="CameraController"]
+script = ExtResource("3_e763b")
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/HeadBobbing"]
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
