@@ -52,3 +52,7 @@ mesh = SubResource("BoxMesh_7nv57")
 
 [node name="PlayerController" parent="." instance=ExtResource("1_4gmbn")]
 player_data = SubResource("Resource_im053")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3)
+use_collision = true
