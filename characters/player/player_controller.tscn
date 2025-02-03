@@ -276,10 +276,11 @@ _data = {
 "crouch": SubResource("Animation_3qwcs")
 }
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("camera_controller")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("camera_controller", "camera")]
 process_mode = 1
 script = ExtResource("1_42pmi")
 camera_controller = NodePath("CameraController")
+camera = NodePath("CameraController/Camera3D")
 player_data = ExtResource("2_g35bi")
 horizontal_sensitivity = 0.4
 vertical_sensitivity = 0.4
@@ -297,9 +298,7 @@ mesh = SubResource("CapsuleMesh_8wybk")
 [node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="HeadBobbing" type="Node3D" parent="CameraController"]
-
-[node name="Camera3D" type="Camera3D" parent="CameraController/HeadBobbing"]
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
